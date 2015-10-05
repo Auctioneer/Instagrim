@@ -150,10 +150,14 @@ public class Image extends HttpServlet {
 
                 is.close();
             }
-            RequestDispatcher rd = request.getRequestDispatcher("/upload.jsp");
-             rd.forward(request, response);
+            //RequestDispatcher rd = request.getRequestDispatcher("/Images/" + username);
+             //rd.forward(request, response);
+            
+            
         }
-
+        HttpSession session=request.getSession();
+            LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
+response.sendRedirect("/Instagrim/Images/" + lg.getUsername());
     }
 
     private void error(String mess, HttpServletResponse response) throws ServletException, IOException {

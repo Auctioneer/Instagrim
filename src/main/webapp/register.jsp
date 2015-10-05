@@ -15,7 +15,7 @@
     <body>
         <header>
         <h1>InstaGrim ! </h1>
-        <h2>Your world in Black and White</h2>
+        <h2>Hardly my greatest work</h2>
         </header>
         <nav>
             <ul>
@@ -32,7 +32,7 @@
                     <li>Password <input type="password" name="password"></li>
                 </ul>
                 <br/>
-                <input type="submit" value="Regidter"> 
+                <input type="submit" value="Register"> 
             </form>
 
         </article>
