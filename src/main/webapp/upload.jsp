@@ -14,7 +14,7 @@
     </head>
     <body>
         <h1>InstaGrim ! </h1>
-        <h2>Your world in Black and White</h2>
+        <h2>Don'tcha wish your servlets were hot like me</h2>
         <nav>
             <ul>
                 <li class="nav"><a href="upload.jsp">Upload</a></li>

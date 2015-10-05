@@ -26,10 +26,15 @@
        
         <article>
             <h3>Register as user</h3>
+            <p>Passwords must contain five or more characters, with at least one number, upper case and lower case character. </p>
             <form method="POST"  action="Register">
                 <ul>
-                    <li>User Name <input type="text" name="username"></li>
-                    <li>Password <input type="password" name="password"></li>
+                    <li>User Name <input type="text" required pattern="\w+" name="username"></li>
+                    <li>First Name <input type="text" required pattern="\w+" name="first_name"></li>
+                    <li>Last Name <input type="text" required pattern="\w+" name="last_name"></li>
+                    <li>E-mail Address <input type="text" required pattern="\w+" name="email"</li>
+                    <li>Password <input type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" name="password" onchange="form.pwd2.pattern = this.value;"></li>
+                    <li>Re-enter password <input type="password" name="password2"></li>
                 </ul>
                 <br/>
                 <input type="submit" value="Register"> 

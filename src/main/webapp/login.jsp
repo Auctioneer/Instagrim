@@ -27,6 +27,15 @@
        
         <article>
             <h3>Login</h3>
+            <%
+                if(session.getAttribute("LoginFailed") != null)
+                {
+                %>
+            <p>${LoginFailed}</p>
+                    
+                 <%   
+            session.setAttribute("LoginFailed", null);                
+                   } %>
             <form method="POST"  action="Login">
                 <ul>
                     <li>User Name <input type="text" name="username"></li>

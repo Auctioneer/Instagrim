@@ -46,11 +46,24 @@ public class Register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username=request.getParameter("username");
+        String firstname=request.getParameter("first_name");
+        String lastname=request.getParameter("last_name");
+        String email=request.getParameter("email");
         String password=request.getParameter("password");
+        String password2=request.getParameter("password2");
         
-        User us=new User();
+        if (password.equals(password2))
+        {
+            User us=new User();
         us.setCluster(cluster);
         us.RegisterUser(username, password);
+        }
+        else
+        {
+            //Else display message that the passwords need to match. A new user should not be created.
+        }
+        
+        
         
 	response.sendRedirect("/Instagrim");
         
