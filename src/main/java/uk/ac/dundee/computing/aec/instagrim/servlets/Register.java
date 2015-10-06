@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
 
@@ -45,10 +46,12 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session=request.getSession();
+        System.out.println("Session in servlet "+session);
         String username=request.getParameter("username");
-        String firstname=request.getParameter("first_name");
-        String lastname=request.getParameter("last_name");
-        String email=request.getParameter("email");
+       // String firstname=request.getParameter("first_name");
+        //String lastname=request.getParameter("last_name");
+        //String email=request.getParameter("email");
         String password=request.getParameter("password");
         String password2=request.getParameter("password2");
         
@@ -57,15 +60,18 @@ public class Register extends HttpServlet {
             User us=new User();
         us.setCluster(cluster);
         us.RegisterUser(username, password);
+        response.sendRedirect("/Instagrim");
         }
         else
         {
             //Else display message that the passwords need to match. A new user should not be created.
+            session.setAttribute("NoMatch", "Your passwords did not match. Please try again.");
+            response.sendRedirect("/Instagrim/register.jsp");
         }
         
         
         
-	response.sendRedirect("/Instagrim");
+	
         
     }
 
