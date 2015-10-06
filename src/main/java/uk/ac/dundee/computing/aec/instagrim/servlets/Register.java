@@ -49,8 +49,8 @@ public class Register extends HttpServlet {
         HttpSession session=request.getSession();
         System.out.println("Session in servlet "+session);
         String username=request.getParameter("username");
-       // String firstname=request.getParameter("first_name");
-        //String lastname=request.getParameter("last_name");
+        String first_name=request.getParameter("first_name");
+        String last_name=request.getParameter("last_name");
         //String email=request.getParameter("email");
         String password=request.getParameter("password");
         String password2=request.getParameter("password2");
@@ -59,7 +59,7 @@ public class Register extends HttpServlet {
         {
             User us=new User();
         us.setCluster(cluster);
-        us.RegisterUser(username, password);
+        us.RegisterUser(username, password, first_name, last_name);
         response.sendRedirect("/Instagrim");
         }
         else

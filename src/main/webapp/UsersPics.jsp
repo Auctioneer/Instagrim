@@ -18,7 +18,7 @@
         <header>
         
         <h1>InstaGrim ! </h1>
-        <h2>Your world in Black and White</h2>
+        <h2>Cheekier than a Nando's</h2>
         </header>
         
         <nav>
@@ -29,7 +29,18 @@
         </nav>
  
         <article>
-            <h1>Your Pics</h1>
+            <%
+                        
+                        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                        if (lg != null) {
+                            String UserName = lg.getUsername();
+                            if (lg.getlogedin()) {
+                    %>
+            
+            <h1><%=lg.getUsername()%>'s Images</h1>
+            <%}
+                            }else{}
+                                %>
         <%
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
             if (lsPics == null) {
