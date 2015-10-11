@@ -28,6 +28,8 @@
                 File to upload: <input type="file" name="upfile"><br/>
 
                 <br/>
+                <input type="radio" name="group1" value="filterBlackWhite" checked>Filter 1: Black and White<br/>
+                <input type="radio" name="group1" value="filterColour1">Filter 2: Colourful and Pretty<br/>
                 <input type="submit" value="Press"> to upload the file!
             </form>
 

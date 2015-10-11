@@ -120,15 +120,27 @@ public class PicModel {
         return null;
     }
 
-    public static BufferedImage createThumbnail(BufferedImage img) {
+    public static BufferedImage createThumbnailColour(BufferedImage img) {
         img = resize(img, Method.SPEED, 250, OP_ANTIALIAS, OP_BRIGHTER);
         // Let's add a little border before we return result.
         return pad(img, 2);
     }
     
-   public static BufferedImage createProcessed(BufferedImage img) {
+    public static BufferedImage createThumbnail(BufferedImage img) {
+        img = resize(img, Method.SPEED, 250, OP_ANTIALIAS, OP_GRAYSCALE);
+        // Let's add a little border before we return result.
+        return pad(img, 2);
+    }
+    
+    public static BufferedImage createProcessedColour(BufferedImage img) {
         int Width=img.getWidth()-1;
         img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_BRIGHTER);
+        return pad(img, 4);
+    }
+    
+   public static BufferedImage createProcessed(BufferedImage img) {
+        int Width=img.getWidth()-1;
+        img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_GRAYSCALE);
         return pad(img, 4);
     }
    
