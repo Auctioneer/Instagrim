@@ -4,14 +4,22 @@
     Author     : Lewis
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Instagrim</title>
+        <link rel="stylesheet" type="text/css" href="Styles.css" />
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <header>
+        <h1>InstaGrim ! </h1>
+        <h2>Another stop in the empty void of social media</h2>
+        </header>
+        <nav>
+            <ul>   
+                <li><a href="/Instagrim/index.jsp">Home</a>
+            </ul>
+        </nav>
     </body>
 </html>

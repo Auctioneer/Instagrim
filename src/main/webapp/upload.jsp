@@ -30,7 +30,6 @@
                 <br/>
                 <input type="radio" name="filter" id="filterBlackWhite" value="blackWhite" checked>Filter 1: Black and White<br/>
                 <input type="radio" name="filter" id="filterColour1" value="colour1">Filter 2: Colourful and Pretty<br/>
-                <input type="text" name="filter"><br/>
                 
                 <input type="submit" value="Press"> to upload the file!
             </form>

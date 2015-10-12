@@ -32,7 +32,16 @@ public class Register extends HttpServlet {
         cluster = CassandraHosts.getCluster();
     }
 
-
+    
+//Love me some restful interface
+@Override
+public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+{
+    RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+    rd.forward(request, response);
+}
+        
+        
 
 
     /**
@@ -55,12 +64,28 @@ public class Register extends HttpServlet {
         String password=request.getParameter("password");
         String password2=request.getParameter("password2");
         
-        if (password.equals(password2))
-        {
+        //If user already exists
             User us=new User();
         us.setCluster(cluster);
+        
+        if (us.isExistingUser(username) == true)
+        {
+            session.setAttribute("AlreadyExists", "A user with this username already exists. Please select a different one.");
+            response.sendRedirect("/Instagrim/register.jsp");
+        }
+        
+        
+        //Else
+        else
+        {
+        if (password.equals(password2))
+        {
+             
+        
         us.RegisterUser(username, password, first_name, last_name);
-        response.sendRedirect("/Instagrim");
+        
+        RequestDispatcher rd = request.getRequestDispatcher("/Login");
+        rd.forward(request, response);
         }
         else
         {
@@ -68,7 +93,7 @@ public class Register extends HttpServlet {
             session.setAttribute("NoMatch", "Your passwords did not match. Please try again.");
             response.sendRedirect("/Instagrim/register.jsp");
         }
-        
+        }
         
         
 	

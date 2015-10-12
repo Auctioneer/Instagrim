@@ -76,9 +76,36 @@ public class User {
             }
         }
    
+        
     
     return false;  
     }
+    
+    public boolean isExistingUser(String username)
+        {
+            boolean exists = false;
+            
+            //This is where we do the check
+            Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select username from userprofiles where login =?");
+        
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        username));
+        if (rs.isExhausted())
+        {
+            exists = false;
+        }
+        else
+        {
+            exists = true;
+        }
+            
+            return exists;
+        }
+    
        public void setCluster(Cluster cluster) {
         this.cluster = cluster;
     }
