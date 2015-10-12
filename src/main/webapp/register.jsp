@@ -34,7 +34,16 @@
                     
                  <%   
             session.setAttribute("NoMatch", null);                
-                   } %>
+                   }
+                
+                 if(session.getAttribute("AlreadyExists") != null)
+                {
+                %>
+                <p><b>${AlreadyExists}</b></p>
+                    
+                 <%   
+            session.setAttribute("AlreadyExists", null);                
+                   }%>
             <p>Passwords must contain five or more characters, with at least one number, upper case and lower case character. </p>
             <form method="POST"  action="Register">
                 <ul>

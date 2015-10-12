@@ -130,12 +130,20 @@ public class Image extends HttpServlet {
             System.out.println("Part Name " + part.getName());
 
             String type = part.getContentType();
+            
+            if (type != null)
+            {
+            
             String filename = part.getSubmittedFileName();
             
             InputStream is = request.getPart(part.getName()).getInputStream();
             int i = is.available();
             HttpSession session=request.getSession();
             LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
+            
+            String whatFilter = (String)request.getParameter("filter");
+            System.out.println("Value of whatfilter is " + whatFilter);
+            
             String username="majed";
             if (lg.getlogedin()){
                 username=lg.getUsername();
@@ -146,9 +154,12 @@ public class Image extends HttpServlet {
                 System.out.println("Length : " + b.length);
                 PicModel tm = new PicModel();
                 tm.setCluster(cluster);
-                tm.insertPic(b, type, filename, username);
+                
+                //Add another argument to this that takes the string of the filter
+                tm.insertPic(b, type, filename, username, whatFilter);
 
                 is.close();
+            }
             }
             //RequestDispatcher rd = request.getRequestDispatcher("/Images/" + username);
              //rd.forward(request, response);
