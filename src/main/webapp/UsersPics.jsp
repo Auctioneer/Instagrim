@@ -38,7 +38,7 @@
                             if (lg.getlogedin()) {
                     %>
             
-            <h1><%=lg.getUsername()%>'s Images</h1>
+            <h1>${currentUser}'s Images</h1>
             <%}
                             }else{}
                                 %>

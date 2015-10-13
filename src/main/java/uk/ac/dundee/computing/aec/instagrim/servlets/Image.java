@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -97,7 +98,15 @@ public class Image extends HttpServlet {
     private void DisplayImageList(String User, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
+        
+       HttpSession session = request.getSession();
+       session.setAttribute("currentUser", User);
+        
         java.util.LinkedList<Pic> lsPics = tm.getPicsForUser(User);
+        
+        //Get dates of images
+        java.util.LinkedList<Date> lsDates = tm.getDatesForUser(User);
+        
         RequestDispatcher rd = request.getRequestDispatcher("/UsersPics.jsp");
         request.setAttribute("Pics", lsPics);
         rd.forward(request, response);
@@ -168,6 +177,7 @@ public class Image extends HttpServlet {
         }
         HttpSession session=request.getSession();
             LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
+
 response.sendRedirect("/Instagrim/Images/" + lg.getUsername());
     }
 

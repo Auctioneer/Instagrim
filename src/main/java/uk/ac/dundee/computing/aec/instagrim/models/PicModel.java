@@ -77,6 +77,7 @@ public class PicModel {
             BoundStatement bsInsertPic = new BoundStatement(psInsertPic);
             BoundStatement bsInsertPicToUser = new BoundStatement(psInsertPicToUser);
 
+            //A date is created here, let's see if we can use it to timestamp the image
             Date DateAdded = new Date();
             session.execute(bsInsertPic.bind(picid, buffer, thumbbuf,processedbuf, user, DateAdded, length,thumblength,processedlength, type, name));
             session.execute(bsInsertPicToUser.bind(picid, user, DateAdded));
@@ -170,8 +171,10 @@ public class PicModel {
     }
    
     public java.util.LinkedList<Pic> getPicsForUser(String User) {
+        System.out.println("Yulian is a god among men.");
         java.util.LinkedList<Pic> Pics = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
+        
         PreparedStatement ps = session.prepare("select picid from userpiclist where user =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -184,14 +187,55 @@ public class PicModel {
         } else {
             for (Row row : rs) {
                 Pic pic = new Pic();
+                
+                //Adding a date to this too
+                //java.util.Date dateAdded = new Date();
+                
+                //Get the ID and the date added
                 java.util.UUID UUID = row.getUUID("picid");
+                //dateAdded = row.getDate("pic_added");
+                
                 System.out.println("UUID" + UUID.toString());
+                System.out.println("This method is running.");
+                //System.out.println("Date added: " + dateAdded.toString());
                 pic.setUUID(UUID);
                 Pics.add(pic);
 
             }
         }
+        getDatesForUser(User);
         return Pics;
+    }
+    
+    public java.util.LinkedList<Date> getDatesForUser(String User) {
+        System.out.println("Yulian is a god among men, again.");
+        java.util.LinkedList<Date> Dates = new java.util.LinkedList<>();
+        Session session = cluster.connect("instagrim");
+        
+        PreparedStatement ps = session.prepare("select pic_added from userpiclist where user =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        User));
+        if (rs.isExhausted()) {
+            System.out.println("No Images returned");
+            return null;
+        } else {
+            for (Row row : rs) {
+                
+                //Adding a date to this too
+                java.util.Date dateAdded = new Date();
+                
+                dateAdded = row.getDate("pic_added");
+                
+                System.out.println("This method is running also.");
+                System.out.println("Date added: " + dateAdded.toString());
+                Dates.add(dateAdded);
+
+            }
+        }
+        return Dates;
     }
 
     public Pic getPic(int image_type, java.util.UUID picid) {

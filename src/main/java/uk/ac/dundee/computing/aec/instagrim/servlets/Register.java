@@ -33,7 +33,7 @@ public class Register extends HttpServlet {
     }
 
     
-//Love me some restful interface
+//Love me some RESTful interface
 @Override
 public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 {

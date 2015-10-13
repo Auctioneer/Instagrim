@@ -16,7 +16,7 @@
     <body>
         <header>
         <h1>InstaGrim ! </h1>
-        <h2>Your world in Black and White</h2>
+        <h2>D3 is still a pass</h2>
         </header>
         <nav>
             <ul>
