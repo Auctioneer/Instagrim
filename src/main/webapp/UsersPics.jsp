@@ -4,6 +4,8 @@
     Author     : Administrator
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="uk.ac.dundee.computing.aec.instagrim.stores.*" %>
@@ -42,20 +44,33 @@
             <%}
                             }else{}
                                 %>
-        <%
+        <%  //Get linked lists of pictures and dates
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
+            java.util.LinkedList<Date> lsDates = (java.util.LinkedList<Date>) request.getAttribute("Dates");
+
             if (lsPics == null) {
         %>
         <p>No Pictures found</p>
         <%
         } else {
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yy");
+                
             Iterator<Pic> iterator;
+            Iterator<Date> iterator2;
             iterator = lsPics.iterator();
+            iterator2 = lsDates.iterator();
             while (iterator.hasNext()) {
                 Pic p = (Pic) iterator.next();
+                Date d = (Date) iterator2.next();
+                String dateToDisplay = df.format(d);
+                //Testing
+                //System.out.println(df.format(d));
 
         %>
-        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/><%
+        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/>
+        <!--Date added goes here -->
+        <p><%=dateToDisplay%></p>
+        <%
 
             }
             }

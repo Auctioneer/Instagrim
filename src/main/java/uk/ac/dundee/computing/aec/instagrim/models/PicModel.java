@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import javax.imageio.ImageIO;
@@ -171,7 +172,6 @@ public class PicModel {
     }
    
     public java.util.LinkedList<Pic> getPicsForUser(String User) {
-        System.out.println("Yulian is a god among men.");
         java.util.LinkedList<Pic> Pics = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
         
@@ -207,11 +207,16 @@ public class PicModel {
         return Pics;
     }
     
+    //Made by Lewis
+    //Pulling the dates from the database
     public java.util.LinkedList<Date> getDatesForUser(String User) {
-        System.out.println("Yulian is a god among men, again.");
+        //Create linked list to return dates at the end
         java.util.LinkedList<Date> Dates = new java.util.LinkedList<>();
+        
+        //Start session
         Session session = cluster.connect("instagrim");
         
+        //Create statement
         PreparedStatement ps = session.prepare("select pic_added from userpiclist where user =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -222,14 +227,16 @@ public class PicModel {
             System.out.println("No Images returned");
             return null;
         } else {
+            //Loop through the database
             for (Row row : rs) {
                 
-                //Adding a date to this too
+                //Create date to add to list
                 java.util.Date dateAdded = new Date();
                 
+                //Set date to be the current row
                 dateAdded = row.getDate("pic_added");
                 
-                System.out.println("This method is running also.");
+                //Add date to linked list
                 System.out.println("Date added: " + dateAdded.toString());
                 Dates.add(dateAdded);
 

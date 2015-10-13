@@ -109,6 +109,7 @@ public class Image extends HttpServlet {
         
         RequestDispatcher rd = request.getRequestDispatcher("/UsersPics.jsp");
         request.setAttribute("Pics", lsPics);
+        request.setAttribute("Dates", lsDates);
         rd.forward(request, response);
 
     }
