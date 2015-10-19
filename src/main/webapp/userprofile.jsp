@@ -4,6 +4,9 @@
     Author     : Lewis
 --%>
 
+<%@page import="java.util.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,5 +24,17 @@
                 <li><a href="/Instagrim/index.jsp">Home</a>
             </ul>
         </nav>
+        
+        <article>
+            <p>Here are some infos 4 u</p>
+            <p><%
+                String fName = (String)request.getAttribute("FirstName");
+                String lName = (String)request.getAttribute("LastName");
+                String email = (String)request.getAttribute("email");
+            %></p>
+            <p><b>Name: </b><%=fName%> <%=lName%><br/>
+                <b>Email: </b><%=email%></p>
+            
+        </article>
     </body>
 </html>

@@ -13,6 +13,7 @@ package uk.ac.dundee.computing.aec.instagrim.stores;
 public class LoggedIn {
     boolean logedin=false;
     String Username=null;
+    String Firstname = null;
     public void LogedIn(){
         
     }
@@ -36,4 +37,16 @@ public class LoggedIn {
     public boolean getlogedin(){
         return logedin;
     }
+    
+    //Added by Lewis - constructor and mutator for first name
+    public void setFirstName(String fname)
+    {
+        this.Firstname=fname;
+    }
+    
+    public String getFirstName()
+    {
+       return Firstname;
+    }
+    
 }

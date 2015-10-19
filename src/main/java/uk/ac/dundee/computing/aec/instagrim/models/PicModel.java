@@ -97,7 +97,6 @@ public class PicModel {
             System.out.println(whatFilter);
             
             if (whatFilter.equals("blackWhite"))
-            //if (whatFilter == null)
             {
                thumbnail = createThumbnail(BI); 
             }
@@ -127,7 +126,6 @@ public class PicModel {
             BufferedImage processed;
             
             if (whatFilter.equals("blackWhite"))
-            //if (whatFilter == null)
             {
                processed = createProcessed(BI); 
             }

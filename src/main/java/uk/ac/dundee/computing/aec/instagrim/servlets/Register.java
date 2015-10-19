@@ -9,6 +9,9 @@ package uk.ac.dundee.computing.aec.instagrim.servlets;
 import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -60,7 +63,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
         String username=request.getParameter("username");
         String first_name=request.getParameter("first_name");
         String last_name=request.getParameter("last_name");
-        //String email=request.getParameter("email");
+        String email=request.getParameter("email");
         String password=request.getParameter("password");
         String password2=request.getParameter("password2");
         
@@ -81,8 +84,9 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
         if (password.equals(password2))
         {
              
-        
-        us.RegisterUser(username, password, first_name, last_name);
+        Set<String> emailSet = new HashSet<String>(Arrays.asList(email));
+            
+        us.RegisterUser(username, password, first_name, last_name, emailSet);
         
         RequestDispatcher rd = request.getRequestDispatcher("/Login");
         rd.forward(request, response);

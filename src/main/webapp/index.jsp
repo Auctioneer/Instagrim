@@ -32,7 +32,6 @@
                 <li><a href="/Instagrim/Upload">Upload</a></li>
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>"><%=lg.getUsername()%>'s Images</a></li>
                 <li><a href="/Instagrim/Logout">Log Out</a></li>
-                <li><a href="userlist.jsp">Users</a></li>
                     <%}
                             }else{
                                 %>

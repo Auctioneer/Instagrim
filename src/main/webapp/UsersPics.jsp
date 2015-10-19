@@ -27,8 +27,7 @@
             <ul>
                 <li class="nav"><a href="/Instagrim/Upload">Upload</a></li>
                 <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
-            </ul>
-        </nav>
+                
  
         <article>
             <%
@@ -36,10 +35,18 @@
                         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                         if (lg != null) {
                             String UserName = lg.getUsername();
+                            String FirstName = lg.getFirstName();
+                            
                             
                             if (lg.getlogedin()) {
+                                System.out.println("Hey, first name here!");
+                            System.out.println(FirstName);
                     %>
-            
+                    <li class="nav"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
+            </ul>
+        </nav>
+            <!-- Get attributes for first and last name in a linked list of strings -->
+            <p>User profile goes here (real name, etc)</p>
             <h1>${currentUser}'s Images</h1>
             <%}
                             }else{}
