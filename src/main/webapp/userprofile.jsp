@@ -21,7 +21,20 @@
         </header>
         <nav>
             <ul>   
-                <li><a href="/Instagrim/index.jsp">Home</a>
+                            <%
+                        
+                        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                        if (lg != null) {
+                            String UserName = lg.getUsername();
+                            
+                            if (lg.getlogedin()) {
+                    %>
+                    <li class="nav"><a href="/Instagrim/Images/<%=lg.getUsername()%>">Back to Images</a></li>
+            
+            <%}
+                            }else{}
+                                %>
+                <li><a href="/Instagrim/">Home</a>
             </ul>
         </nav>
         
@@ -31,9 +44,13 @@
                 String fName = (String)request.getAttribute("FirstName");
                 String lName = (String)request.getAttribute("LastName");
                 String email = (String)request.getAttribute("email");
+                Pic mostRecentPic = (Pic)request.getAttribute("mostRecentPic");
             %></p>
             <p><b>Name: </b><%=fName%> <%=lName%><br/>
                 <b>Email: </b><%=email%></p>
+            <p>Most recently uploaded image:</p>
+            <a href="/Instagrim/Image/<%=mostRecentPic.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=mostRecentPic.getSUUID()%>"></a><br/>
+            
             
         </article>
     </body>

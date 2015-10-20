@@ -16,7 +16,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.reflect.Array.set;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Set;
+import java.util.LinkedList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -26,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
 
 /**
  *
@@ -52,6 +55,61 @@ public class Profile extends HttpServlet {
             out.println("If you're seeing this, it's fucked.");
         }
     }
+    
+    //Boy howdy, what's the chances this'll break?
+//    public void getMostRecentPic(String User) {
+//        java.util.LinkedList<Pic> picList = new java.util.LinkedList<>();
+//        Session session = cluster.connect("instagrim");
+//        
+//        PreparedStatement ps = session.prepare("select picid from userpiclist where user =?");
+//        ResultSet rs = null;
+//        BoundStatement boundStatement = new BoundStatement(ps);
+//        rs = session.execute( // this is where the query is executed
+//                boundStatement.bind( // here you are binding the 'boundStatement'
+//                        User));
+//        if (rs.isExhausted()) {
+//            System.out.println("No Images returned");
+//
+//        } else {
+//            for (Row row : rs) {
+//                Pic pic = new Pic();
+//                
+//                java.util.UUID UUID = row.getUUID("picid");
+//                pic.setUUID(UUID);
+//                picList.add(pic);
+//
+//            }
+//        }
+//
+//		Pic mostRecentPic = picList.getFirst();
+//                
+//                RequestDispatcher rd = request.getRequestDispatcher("/UsersPics.jsp");
+//	        request.setAttribute("mostRecentPic",mostRecentPic);
+//    }
+    
+    private void getMostRecentPic(String User, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        PicModel tm = new PicModel();
+        tm.setCluster(cluster);
+        
+//       HttpSession session = request.getSession();
+  //     session.setAttribute("currentUser", User);
+        
+        java.util.LinkedList<Pic> lsPics = tm.getPicsForUser(User);
+        Pic mostRecentPic = lsPics.getFirst();
+        
+
+        request.setAttribute("mostRecentPic", mostRecentPic);
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -71,6 +129,7 @@ public class Profile extends HttpServlet {
         String emailFinal = "";
         Set<String> email;
         
+        //YA NEED TO CHANGE THIS, BOI
         username = "YaBoyBillNye";
     
         Session session = cluster.connect("instagrim");
@@ -98,6 +157,7 @@ public class Profile extends HttpServlet {
          request.setAttribute("email", emailFinal);
             }
          
+        getMostRecentPic(username, request, response);
          
         RequestDispatcher rd = request.getRequestDispatcher("/userprofile.jsp");
     rd.forward(request, response);

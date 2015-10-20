@@ -64,6 +64,8 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
         String first_name=request.getParameter("first_name");
         String last_name=request.getParameter("last_name");
         String email=request.getParameter("email");
+        
+        //For password verification, we'll compare the two passwords
         String password=request.getParameter("password");
         String password2=request.getParameter("password2");
         
@@ -78,14 +80,14 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
         }
         
         
-        //Else
+        //Else compare passwords
         else
         {
         if (password.equals(password2))
         {
-             
+        //Emails are stored as a set here
         Set<String> emailSet = new HashSet<String>(Arrays.asList(email));
-            
+        //Register the new user
         us.RegisterUser(username, password, first_name, last_name, emailSet);
         
         RequestDispatcher rd = request.getRequestDispatcher("/Login");
