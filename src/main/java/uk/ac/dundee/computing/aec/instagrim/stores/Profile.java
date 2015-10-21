@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
 import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
 
 /**
@@ -129,9 +130,10 @@ public class Profile extends HttpServlet {
         String emailFinal = "";
         Set<String> email;
         
-        //YA NEED TO CHANGE THIS, BOI
-        username = "YaBoyBillNye";
-    
+        //Get username
+        String args[] = Convertors.SplitRequestPath(request);
+        username = args[2];
+            
         Session session = cluster.connect("instagrim");
         PreparedStatement ps = session.prepare("select first_name, last_name, email from userprofiles where login =?");
         ResultSet rs = null;
