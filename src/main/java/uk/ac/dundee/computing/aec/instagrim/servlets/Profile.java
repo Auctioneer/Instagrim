@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.dundee.computing.aec.instagrim.stores;
+package uk.ac.dundee.computing.aec.instagrim.servlets;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
@@ -30,6 +30,8 @@ import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
 import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
+import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
+import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 
 /**
  *
@@ -57,36 +59,6 @@ public class Profile extends HttpServlet {
         }
     }
     
-    //Boy howdy, what's the chances this'll break?
-//    public void getMostRecentPic(String User) {
-//        java.util.LinkedList<Pic> picList = new java.util.LinkedList<>();
-//        Session session = cluster.connect("instagrim");
-//        
-//        PreparedStatement ps = session.prepare("select picid from userpiclist where user =?");
-//        ResultSet rs = null;
-//        BoundStatement boundStatement = new BoundStatement(ps);
-//        rs = session.execute( // this is where the query is executed
-//                boundStatement.bind( // here you are binding the 'boundStatement'
-//                        User));
-//        if (rs.isExhausted()) {
-//            System.out.println("No Images returned");
-//
-//        } else {
-//            for (Row row : rs) {
-//                Pic pic = new Pic();
-//                
-//                java.util.UUID UUID = row.getUUID("picid");
-//                pic.setUUID(UUID);
-//                picList.add(pic);
-//
-//            }
-//        }
-//
-//		Pic mostRecentPic = picList.getFirst();
-//                
-//                RequestDispatcher rd = request.getRequestDispatcher("/UsersPics.jsp");
-//	        request.setAttribute("mostRecentPic",mostRecentPic);
-//    }
     
     private void getMostRecentPic(String User, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -104,14 +76,6 @@ public class Profile extends HttpServlet {
 
     }
     
-    
-    
-    
-    
-    
-    
-    
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -157,6 +121,7 @@ public class Profile extends HttpServlet {
             request.setAttribute("FirstName", firstname);
          request.setAttribute("LastName", lastname);
          request.setAttribute("email", emailFinal);
+         request.setAttribute("username", username);
             }
          
         getMostRecentPic(username, request, response);
