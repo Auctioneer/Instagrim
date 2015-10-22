@@ -27,6 +27,7 @@
             <ul>
                 <li class="nav"><a href="/Instagrim/Upload">Upload</a></li>
                 <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
+                <li class="nav"><a href="/Instagrim/UserList">All Users</a></li>
                 
  
         <article>

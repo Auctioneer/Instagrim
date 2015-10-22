@@ -107,12 +107,12 @@ public class User {
     }
 
     //Method for updating user info
-    public boolean updateUserInfo(String username, String firstname, String lastname)
+    public boolean updateUserInfo(String username, String firstname, String lastname, Set<String> email)
     {
         Session session = cluster.connect("instagrim");
-        PreparedStatement ps = session.prepare("update userprofiles set first_name=?, last_name=? where login=?");
+        PreparedStatement ps = session.prepare("update userprofiles set first_name=?, last_name=?, email=? where login=?");
         BoundStatement boundStatement = new BoundStatement(ps);
-        session.execute(boundStatement.bind(firstname, lastname, username));
+        session.execute(boundStatement.bind(firstname, lastname, email, username));
         return true;
     }
     

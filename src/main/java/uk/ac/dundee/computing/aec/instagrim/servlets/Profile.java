@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import static java.lang.reflect.Array.set;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.LinkedList;
 import javax.servlet.RequestDispatcher;
@@ -150,11 +151,15 @@ public class Profile extends HttpServlet {
         String username = lg.getUsername();
         String firstname = request.getParameter("first_name");
         String lastname = request.getParameter("last_name");
+        String email = request.getParameter("email");
+        
+        //Emails are stored as a set here
+        Set<String> emailSet = new HashSet<String>(Arrays.asList(email));
         
         User user = new User();
         user.setCluster(cluster);
         
-        user.updateUserInfo(username, firstname, lastname);
+        user.updateUserInfo(username, firstname, lastname, emailSet);
 
         response.sendRedirect("/Instagrim/Profile/" + lg.getUsername());
 
