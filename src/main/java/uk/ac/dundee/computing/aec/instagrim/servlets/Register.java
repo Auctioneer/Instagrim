@@ -97,7 +97,8 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
         {
             //Else display message that the passwords need to match. A new user should not be created.
             session.setAttribute("NoMatch", "Your passwords did not match. Please try again.");
-            response.sendRedirect("/Instagrim/register.jsp");
+            //Changed this to resigter than register.jsp
+            response.sendRedirect("/Instagrim/Register");
         }
         }
         

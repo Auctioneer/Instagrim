@@ -53,14 +53,16 @@
                             
                             
                             
-                    %>
+            %>
             <p>Change details here:</p>
+            <form method="Post">
                     <li>First Name <input type="text" required pattern="\w+" value="<%=fName%>" name="first_name"></li>
                     <li>Last Name <input type="text" required pattern="\w+" value="<%=lName%>" name="last_name"></li> 
                     <li>E-mail Address <input type="email" required pattern="[^ @]*@[^ @]*" value="<%=email%>" name="email"</li>
             </ul>
                 <br/>
                 <input type="submit" value="Update Profile"> 
+            </form>
             <%}}
                             else{}
                             

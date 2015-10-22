@@ -30,6 +30,8 @@ import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
 import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
+import uk.ac.dundee.computing.aec.instagrim.models.User;
+import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 
@@ -141,7 +143,21 @@ public class Profile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        HttpSession session = request.getSession();
+        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+        
+        String username = lg.getUsername();
+        String firstname = request.getParameter("first_name");
+        String lastname = request.getParameter("last_name");
+        
+        User user = new User();
+        user.setCluster(cluster);
+        
+        user.updateUserInfo(username, firstname, lastname);
+
+        response.sendRedirect("/Instagrim/Profile/" + lg.getUsername());
+
     }
 
     /**

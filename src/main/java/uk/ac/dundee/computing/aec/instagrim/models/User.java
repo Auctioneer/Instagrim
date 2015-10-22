@@ -85,7 +85,6 @@ public class User {
     public boolean isExistingUser(String username) {
         boolean exists = false;
 
-        //This is where we do the check
         Session session = cluster.connect("instagrim");
         PreparedStatement ps = session.prepare("select login from userprofiles where login =?");
 
@@ -107,5 +106,14 @@ public class User {
         this.cluster = cluster;
     }
 
+    //Method for updating user info
+    public boolean updateUserInfo(String username, String firstname, String lastname)
+    {
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("update userprofiles set first_name=?, last_name=? where login=?");
+        BoundStatement boundStatement = new BoundStatement(ps);
+        session.execute(boundStatement.bind(firstname, lastname, username));
+        return true;
+    }
     
 }
