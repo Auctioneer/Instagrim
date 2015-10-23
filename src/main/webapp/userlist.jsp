@@ -4,6 +4,7 @@
     Author     : Administrator
 --%>
 
+<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn"%>
 <%@page import="java.util.Iterator"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,12 +19,6 @@
         <h1>InstaGrim ! </h1>
         <h2>Wishing I'd studied Psychology</h2>
         </header>
-        <nav>
-            <ul>
-                
-                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
-            </ul>
-        </nav>
        
         <article>
               <%  //Get linked lists of pictures and dates
@@ -42,8 +37,7 @@
                 String s = (String) iterator.next();
 
         %>
-        <a href="/Instagrim/Profile/<%=s%>" ><%=s%></a><br/>
-        <!--Date added goes here -->
+        <a href="/Instagrim/Profile/<%=s%>" ><%=s%>'s Profile</a> - <a href="/Instagrim/Images/<%=s%>" ><%=s%>'s Images<br/>
         <%
 
             }
@@ -51,7 +45,18 @@
         %>
         </article>
         <footer>
-            <ul>
+            <ul><%
+                        
+                        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                        if (lg != null) {
+                            
+                            if (lg.getlogedin()) {
+
+                    %>
+                    <li class="nav"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
+                    <li class="nav"><a href="/Instagrim/UserList">All Users</a></li>
+                    <li class="nav"><a href="/Instagrim/Upload">Upload</a></li>
+            <% } }else {} %>
                 <li class="footer"><a href="/Instagrim">Home</a></li>
             </ul>
         </footer>

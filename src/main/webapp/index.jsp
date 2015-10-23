@@ -41,7 +41,7 @@
                                         
                             
                     }%>
-
+                <li><a href="/Instagrim/UserList">All Users</a></li>
                 <% %>
         </ul>
         </nav>

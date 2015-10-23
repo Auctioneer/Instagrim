@@ -25,8 +25,8 @@
         
         <nav>
             <ul>
-                <li class="nav"><a href="/Instagrim/Upload">Upload</a></li>
-                <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
+                
+                <!--<li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>-->
                 <li class="nav"><a href="/Instagrim/UserList">All Users</a></li>
                 
  
@@ -44,13 +44,15 @@
                             //System.out.println(FirstName);
                     %>
                     <li class="nav"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
+                    <li class="nav"><a href="/Instagrim/Upload">Upload</a></li>
             </ul>
         </nav>
             <!-- Get attributes for first and last name in a linked list of strings -->
-            <h1>${currentUser}'s Images</h1>
+            
             <%}
                             }else{}
                                 %>
+            <h1>${currentUser}'s Images</h1>
         <%  //Get linked lists of pictures and dates
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
             java.util.LinkedList<Date> lsDates = (java.util.LinkedList<Date>) request.getAttribute("Dates");

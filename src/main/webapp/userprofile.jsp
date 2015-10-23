@@ -29,7 +29,13 @@
                 String email = (String)request.getAttribute("email");
                 String uName = (String)request.getAttribute("username");
                 Pic mostRecentPic = (Pic)request.getAttribute("mostRecentPic");
+                
+                LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                        if (lg != null){
+                                                        
             %>
+            <li class="nav"><a href="/Instagrim/Upload">Upload</a></li>
+            <% } else {} %>
                     <li class="nav"><a href="/Instagrim/Images/<%=uName%>">Back to <%=uName%>'s Images</a></li>
             </ul>
         </nav>
@@ -43,17 +49,11 @@
             <p>Most recently uploaded image:</p>
             <a href="/Instagrim/Image/<%=mostRecentPic.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=mostRecentPic.getSUUID()%>"></a><br/>
             <%
-                        
-                        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-                        if (lg != null){
-                            
-                        
-                            String lgName = lg.getUsername();
-                            if (lgName.equals(uName)) {
-                            
-                            
-                            
+                if (lg != null){    
+                    String lgName = lg.getUsername();
+             if (lgName.equals(uName)) {      
             %>
+            
             <p>Change details here:</p>
             <form method="Post">
                     <li>First Name <input type="text" required pattern="\w+" value="<%=fName%>" name="first_name"></li>
@@ -63,9 +63,7 @@
                 <br/>
                 <input type="submit" value="Update Profile"> 
             </form>
-            <%}}
-                            else{}
-                            
+            <%}} else {}                       
                                 %>
             
         </article>

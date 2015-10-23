@@ -18,8 +18,9 @@
         <h2>Don'tcha wish your servlets were hot like me</h2>
         <nav>
             <ul>
-                <li class="nav"><a href="upload.jsp">Upload</a></li>
-                <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
+                <!--<li class="nav"><a href="upload.jsp">Upload</a></li>-->
+                <li class="nav"><a href="/Instagrim/UserList">All Users</a></li>
+                <!--<li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>-->
                 <%
                         
                         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
@@ -29,6 +30,8 @@
 
                     %>
                 <li class="nav"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
+                <li><a href="/Instagrim/Images/<%=lg.getUsername()%>"><%=lg.getUsername()%>'s Images</a></li>
+                <li><a href="/Instagrim/Logout">Log Out</a></li>
                 <% } } %>
             </ul>
         </nav>
