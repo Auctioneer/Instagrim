@@ -62,19 +62,19 @@ public class Profile extends HttpServlet {
         }
     }
     
-    
+    //Method to return the most recent image the user has uploaded
     private void getMostRecentPic(String User, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
-        
-//       HttpSession session = request.getSession();
-  //     session.setAttribute("currentUser", User);
-        
+ 
+        //The most recent picture is at the top of the linked list that is returned when getPicsForUser is called
         java.util.LinkedList<Pic> lsPics = tm.getPicsForUser(User);
+        
+        //So just take the first picture of the list from that
         Pic mostRecentPic = lsPics.getFirst();
         
-
+        //And set it as the attribute
         request.setAttribute("mostRecentPic", mostRecentPic);
 
     }
@@ -90,17 +90,20 @@ public class Profile extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
+        //Initialise variables
         String username = "";
         String firstname = "";
         String lastname = "";
         String emailFinal = "";
         Set<String> email;
         
-        //Get username
+        //Get username - it's the third item in the array when the URL is split up
         String args[] = Convertors.SplitRequestPath(request);
         username = args[2];
-            
+        
+        //Get first, last names and email pertaining to user
         Session session = cluster.connect("instagrim");
         PreparedStatement ps = session.prepare("select first_name, last_name, email from userprofiles where login =?");
         ResultSet rs = null;
@@ -113,22 +116,29 @@ public class Profile extends HttpServlet {
 
         } else {
             for (Row row : rs) {
+                
+                    //Set details
                     firstname = row.getString("first_name");
                     lastname = row.getString("last_name");
                     email = row.getSet("email", String.class);
                     
+                    //Converting e-mail to string from set
                     String [] newEmail = email.toArray(new String [email.size()]);
                     emailFinal = Arrays.toString(newEmail);
                     emailFinal = emailFinal.substring(1, emailFinal.length()-1);
                 }
+            
+            //Set attributes
             request.setAttribute("FirstName", firstname);
          request.setAttribute("LastName", lastname);
          request.setAttribute("email", emailFinal);
          request.setAttribute("username", username);
             }
          
+        //Call method to get most recent picture
         getMostRecentPic(username, request, response);
          
+        //Direct to user's profile
         RequestDispatcher rd = request.getRequestDispatcher("/userprofile.jsp");
     rd.forward(request, response);
     }
@@ -141,6 +151,7 @@ public class Profile extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    //For updating profile info
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -148,6 +159,7 @@ public class Profile extends HttpServlet {
         HttpSession session = request.getSession();
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         
+        //Get user details from form
         String username = lg.getUsername();
         String firstname = request.getParameter("first_name");
         String lastname = request.getParameter("last_name");
@@ -156,11 +168,14 @@ public class Profile extends HttpServlet {
         //Emails are stored as a set here
         Set<String> emailSet = new HashSet<String>(Arrays.asList(email));
         
+        //Create new user object
         User user = new User();
         user.setCluster(cluster);
         
+        //Call method to update info
         user.updateUserInfo(username, firstname, lastname, emailSet);
 
+        //Return user to profile page, which will show updated info
         response.sendRedirect("/Instagrim/Profile/" + lg.getUsername());
 
     }

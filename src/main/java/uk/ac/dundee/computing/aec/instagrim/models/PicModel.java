@@ -145,25 +145,29 @@ public class PicModel {
         return null;
     }
 
+    //Creating a thumnail for the colour filter
     public static BufferedImage createThumbnailColour(BufferedImage img) {
         img = resize(img, Method.SPEED, 250, OP_ANTIALIAS, OP_BRIGHTER);
         // Let's add a little border before we return result.
         return pad(img, 2);
     }
     
+    //Creating a thumbnail for the black and white filter
     public static BufferedImage createThumbnail(BufferedImage img) {
         img = resize(img, Method.SPEED, 250, OP_ANTIALIAS, OP_GRAYSCALE);
         // Let's add a little border before we return result.
         return pad(img, 2);
     }
     
+    //Processing image with the colour filter
     public static BufferedImage createProcessedColour(BufferedImage img) {
         int Width=img.getWidth()-1;
         img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_BRIGHTER);
         return pad(img, 4);
     }
     
-   public static BufferedImage createProcessed(BufferedImage img) {
+    //Processing image with the black and white filter
+    public static BufferedImage createProcessed(BufferedImage img) {
         int Width=img.getWidth()-1;
         img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_GRAYSCALE);
         return pad(img, 4);
@@ -186,28 +190,26 @@ public class PicModel {
             for (Row row : rs) {
                 Pic pic = new Pic();
                 
-                //Adding a date to this too
-                //java.util.Date dateAdded = new Date();
-                
-                //Get the ID and the date added
+                //Get the ID
                 java.util.UUID UUID = row.getUUID("picid");
-                //dateAdded = row.getDate("pic_added");
                 
-                System.out.println("UUID" + UUID.toString());
-                System.out.println("This method is running.");
-                //System.out.println("Date added: " + dateAdded.toString());
+                //Set UUID of picture
                 pic.setUUID(UUID);
+                
+                //Add picture to linked list
                 Pics.add(pic);
 
             }
         }
-        getDatesForUser(User);
+        
+        //Return the linked list
         return Pics;
     }
     
     //Made by Lewis
     //Pulling the dates from the database
-    public java.util.LinkedList<Date> getDatesForUser(String User) {
+    public java.util.LinkedList<Date> getDatesForUser(String User)
+    {
         //Create linked list to return dates at the end
         java.util.LinkedList<Date> Dates = new java.util.LinkedList<>();
         
@@ -235,11 +237,11 @@ public class PicModel {
                 dateAdded = row.getDate("pic_added");
                 
                 //Add date to linked list
-                System.out.println("Date added: " + dateAdded.toString());
                 Dates.add(dateAdded);
 
             }
         }
+        //Return linked list of dates
         return Dates;
     }
 

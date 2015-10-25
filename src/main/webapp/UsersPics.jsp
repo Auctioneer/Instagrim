@@ -32,19 +32,15 @@
  
         <article>
             <%
-                        
                         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                         if (lg != null) {
-                            String UserName = lg.getUsername();
-                            //String FirstName = lg.getFirstName();
-                            
+                            //String UserName = lg.getUsername();                            
                             
                             if (lg.getlogedin()) {
-                                //System.out.println("Hey, first name here!");
-                            //System.out.println(FirstName);
                     %>
                     <li class="nav"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
                     <li class="nav"><a href="/Instagrim/Upload">Upload</a></li>
+                    <li class="nav"><a href="/Instagrim/Logout">Log Out</a></li>
             </ul>
         </nav>
             <!-- Get attributes for first and last name in a linked list of strings -->
@@ -62,8 +58,10 @@
         <p>No Pictures found</p>
         <%
         } else {
+                //Date formatting
                 SimpleDateFormat df = new SimpleDateFormat("dd-MM-yy");
                 
+            //Iterate through the lists of pics and dates
             Iterator<Pic> iterator;
             Iterator<Date> iterator2;
             iterator = lsPics.iterator();
@@ -72,10 +70,9 @@
                 Pic p = (Pic) iterator.next();
                 Date d = (Date) iterator2.next();
                 String dateToDisplay = df.format(d);
-                //Testing
-                //System.out.println(df.format(d));
 
-        %>
+
+        //Display each one as we go    %>
         <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/>
         <!--Date added goes here -->
         <p><%=dateToDisplay%></p>

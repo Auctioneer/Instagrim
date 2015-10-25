@@ -100,14 +100,17 @@ public class Image extends HttpServlet {
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
         
-       HttpSession session = request.getSession();
-       session.setAttribute("currentUser", User);
+        //Set current user to be the string passed in, for use in the JSP
+        HttpSession session = request.getSession();
+        session.setAttribute("currentUser", User);
         
+        //Get list of pictures
         java.util.LinkedList<Pic> lsPics = tm.getPicsForUser(User);
         
         //Get dates of images
         java.util.LinkedList<Date> lsDates = tm.getDatesForUser(User);
         
+        //Set attributes so they can be fetched, and direct to the UsersPics.jsp file
         RequestDispatcher rd = request.getRequestDispatcher("/UsersPics.jsp");
         request.setAttribute("Pics", lsPics);
         request.setAttribute("Dates", lsDates);
@@ -152,8 +155,8 @@ public class Image extends HttpServlet {
             HttpSession session=request.getSession();
             LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
             
+            //Get the name of the filter that the image will be processed with
             String whatFilter = (String)request.getParameter("filter");
-            System.out.println("Value of whatfilter is " + whatFilter);
             
             String username="majed";
             if (lg.getlogedin()){
@@ -166,7 +169,7 @@ public class Image extends HttpServlet {
                 PicModel tm = new PicModel();
                 tm.setCluster(cluster);
                 
-                //Add another argument to this that takes the string of the filter
+                //Call insert pic method, also passing in the filter
                 tm.insertPic(b, type, filename, username, whatFilter);
 
                 is.close();
@@ -178,9 +181,10 @@ public class Image extends HttpServlet {
             
         }
         HttpSession session=request.getSession();
-            LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
-
-response.sendRedirect("/Instagrim/Images/" + lg.getUsername());
+        LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
+           
+        //After upload, redirect to user's images page.
+        response.sendRedirect("/Instagrim/Images/" + lg.getUsername());
     }
 
     private void error(String mess, HttpServletResponse response) throws ServletException, IOException {

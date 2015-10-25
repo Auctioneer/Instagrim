@@ -23,19 +23,22 @@
             <ul>   
                             
                 <li><a href="/Instagrim/">Home</a>
-            <%
+            <%  //Get the attributes for the user's details
                 String fName = (String)request.getAttribute("FirstName");
                 String lName = (String)request.getAttribute("LastName");
                 String email = (String)request.getAttribute("email");
                 String uName = (String)request.getAttribute("username");
                 Pic mostRecentPic = (Pic)request.getAttribute("mostRecentPic");
                 
+                //If user is logged in, show Upload link
                 LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                         if (lg != null){
                                                         
             %>
             <li class="nav"><a href="/Instagrim/Upload">Upload</a></li>
+            <li class="nav"><a href="/Instagrim/Logout">Log Out</a></li>
             <% } else {} %>
+            
                     <li class="nav"><a href="/Instagrim/Images/<%=uName%>">Back to <%=uName%>'s Images</a></li>
             </ul>
         </nav>
@@ -43,12 +46,15 @@
         <article>
             <p>Here are some infos 4 u</p>
 
+            <!-- Display details -->
             <p><b>Username: </b><%=uName%><br/>
                 <b>Name: </b><%=fName%> <%=lName%><br/>
                 <b>Email: </b><%=email%></p>
             <p>Most recently uploaded image:</p>
             <a href="/Instagrim/Image/<%=mostRecentPic.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=mostRecentPic.getSUUID()%>"></a><br/>
-            <%
+            
+            <% //Here we show the input boxes to change details,
+               //if the user logged in matches the current user's page
                 if (lg != null){    
                     String lgName = lg.getUsername();
              if (lgName.equals(uName)) {      

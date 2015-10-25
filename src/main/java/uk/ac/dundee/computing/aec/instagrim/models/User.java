@@ -109,10 +109,17 @@ public class User {
     //Method for updating user info
     public boolean updateUserInfo(String username, String firstname, String lastname, Set<String> email)
     {
+        //Create session
         Session session = cluster.connect("instagrim");
+        
+        //Use update from CQL
         PreparedStatement ps = session.prepare("update userprofiles set first_name=?, last_name=?, email=? where login=?");
         BoundStatement boundStatement = new BoundStatement(ps);
+        
+        //Bind statement to parameters
         session.execute(boundStatement.bind(firstname, lastname, email, username));
+        
+        //Returning a boolean just in case I need to check something
         return true;
     }
     

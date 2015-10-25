@@ -18,11 +18,11 @@
         <h2>Don'tcha wish your servlets were hot like me</h2>
         <nav>
             <ul>
-                <!--<li class="nav"><a href="upload.jsp">Upload</a></li>-->
+
                 <li class="nav"><a href="/Instagrim/UserList">All Users</a></li>
-                <!--<li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>-->
+
                 <%
-                        
+                        //If user is logged in, show profile, image page and log out
                         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                         if (lg != null) {
                             
@@ -42,6 +42,8 @@
                 File to upload: <input type="file" name="upfile"><br/>
 
                 <br/>
+                
+                <!--Radio buttons to select between two filters-->
                 <input type="radio" name="filter" id="filterBlackWhite" value="blackWhite" checked>Filter 1: Black and White<br/>
                 <input type="radio" name="filter" id="filterColour1" value="colour1">Filter 2: Colourful and Pretty<br/>
                 

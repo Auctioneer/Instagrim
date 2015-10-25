@@ -17,26 +17,22 @@
         <h1>InstaGrim ! </h1>
         <h2>Hardly my greatest work</h2>
         </header>
-        <nav>
-            <ul>
-                
-                <!--<li><a href="/Instagrim/Images/majed">Sample Images</a></li>-->
-            </ul>
-        </nav>
+
        
         <article>
             <h3>Register as user</h3>
-            <%
+            <% //Message to display when passwords don't match
                 if(session.getAttribute("NoMatch") != null)
                 {
                 %>
                 <p><b>${NoMatch}</b></p>
                     
-                 <%   
-            session.setAttribute("NoMatch", null);                
-                   }
+                <%   
+                session.setAttribute("NoMatch", null);                
+                }
                 
-                 if(session.getAttribute("AlreadyExists") != null)
+                //Message to display if user already exists
+                if(session.getAttribute("AlreadyExists") != null)
                 {
                 %>
                 <p><b>${AlreadyExists}</b></p>
@@ -45,6 +41,8 @@
             session.setAttribute("AlreadyExists", null);                
                    }%>
             <p>Passwords must contain five or more characters, with at least one number, upper case and lower case character. </p>
+            
+            <!--Registration form -->
             <form method="POST"  action="Register">
                 <ul>
                     <li>User Name <input type="text" required pattern="\w+" name="username"></li>
@@ -62,6 +60,7 @@
         </article>
         <footer>
             <ul>
+                <li class="footer"><a href="/Instagrim/Login">Login</a></li>
                 <li class="footer"><a href="/Instagrim">Home</a></li>
             </ul>
         </footer>

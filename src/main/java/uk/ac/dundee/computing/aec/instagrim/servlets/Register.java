@@ -44,9 +44,6 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     rd.forward(request, response);
 }
         
-        
-
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -60,6 +57,8 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
             throws ServletException, IOException {
         HttpSession session=request.getSession();
         System.out.println("Session in servlet "+session);
+        
+        //Get parameters from form
         String username=request.getParameter("username");
         String first_name=request.getParameter("first_name");
         String last_name=request.getParameter("last_name");
@@ -69,10 +68,11 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
         String password=request.getParameter("password");
         String password2=request.getParameter("password2");
         
-        //If user already exists
-            User us=new User();
+        //Create new user object
+        User us=new User();
         us.setCluster(cluster);
         
+        //If user already exists, send back a message to state this
         if (us.isExistingUser(username) == true)
         {
             session.setAttribute("AlreadyExists", "A user with this username already exists. Please select a different one.");
@@ -83,20 +83,23 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
         //Else compare passwords
         else
         {
+            
         if (password.equals(password2))
         {
-        //Emails are stored as a set here
-        Set<String> emailSet = new HashSet<String>(Arrays.asList(email));
-        //Register the new user
-        us.RegisterUser(username, password, first_name, last_name, emailSet);
+            //Emails are stored as a set here
+            Set<String> emailSet = new HashSet<String>(Arrays.asList(email));
+            //Register the new user
+            us.RegisterUser(username, password, first_name, last_name, emailSet);
         
-        RequestDispatcher rd = request.getRequestDispatcher("/Login");
-        rd.forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher("/Login");
+            rd.forward(request, response);
         }
+        
         else
         {
             //Else display message that the passwords need to match. A new user should not be created.
             session.setAttribute("NoMatch", "Your passwords did not match. Please try again.");
+            
             //Changed this to resigter than register.jsp
             response.sendRedirect("/Instagrim/Register");
         }

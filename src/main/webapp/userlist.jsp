@@ -21,14 +21,16 @@
         </header>
        
         <article>
-              <%  //Get linked lists of pictures and dates
+              <%  //Get linked list of users
             java.util.LinkedList<String> userList = (java.util.LinkedList<String>) request.getAttribute("users");
 
+            //Display a message if there are no users
             if (userList == null) {
         %>
         <p>No Pictures found</p>
         <%
         } else {
+            //Iterate through list of users and display links to their profile and images
             Iterator<String> iterator;
 
             iterator = userList.iterator();
@@ -46,7 +48,7 @@
         </article>
         <footer>
             <ul><%
-                        
+                        //If user is logged in, display the following links:
                         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                         if (lg != null) {
                             
@@ -56,6 +58,7 @@
                     <li class="nav"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
                     <li class="nav"><a href="/Instagrim/UserList">All Users</a></li>
                     <li class="nav"><a href="/Instagrim/Upload">Upload</a></li>
+                    <li class="nav"><a href="/Instagrim/Logout">Log Out</a></li>
             <% } }else {} %>
                 <li class="footer"><a href="/Instagrim">Home</a></li>
             </ul>

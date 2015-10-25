@@ -23,10 +23,10 @@
             <ul>
 
                     <%
-                        
+                        //If user is logged in, show Upload, Log Out and link to their images
                         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                         if (lg != null) {
-                            String UserName = lg.getUsername();
+                            
                             if (lg.getlogedin()) {
                     %>
                 <li><a href="/Instagrim/Upload">Upload</a></li>

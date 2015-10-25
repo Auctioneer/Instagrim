@@ -71,12 +71,14 @@ public class UserList extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-//Love me some RESTful interface
+//doGet
 @Override
 public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 {
+    //Create a linked list of users
     java.util.LinkedList<String> userArrayList = getUsers();
     
+    //Set that as the attribute
     request.setAttribute("users", userArrayList);
     
     RequestDispatcher rd = request.getRequestDispatcher("userlist.jsp");
@@ -137,7 +139,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
 
             }
         }
-        
+        //Finally, return list
         return users;
     }
 }

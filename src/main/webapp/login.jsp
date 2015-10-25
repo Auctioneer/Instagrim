@@ -18,16 +18,10 @@
         <h1>InstaGrim ! </h1>
         <h2>D3 is still a pass</h2>
         </header>
-        <nav>
-            <ul>
-                
-               <!-- <li><a href="/Instagrim/Images/majed">Sample Images</a></li>-->
-            </ul>
-        </nav>
        
         <article>
             <h3>Login</h3>
-            <%
+            <%  //In case of login fail, display message
                 if(session.getAttribute("LoginFailed") != null)
                 {
                 %>
@@ -48,6 +42,7 @@
         </article>
         <footer>
             <ul>
+                <li class="footer"><a href="/Instagrim/Register">Register</a></li>
                 <li class="footer"><a href="/Instagrim">Home</a></li>
             </ul>
         </footer>
