@@ -14,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Instagrim</title>
-        <link rel="stylesheet" type="text/css" href="/Instagrim/Styles.css" />
+        <link rel="stylesheet" type="text/css" href="/InstaLew/Styles.css" />
     </head>
     <body>
         <header>
@@ -27,7 +27,7 @@
             <ul>
                 
                 <!--<li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>-->
-                <li class="nav"><a href="/Instagrim/UserList">All Users</a></li>
+                <li class="nav"><a href="/InstaLew/UserList">All Users</a></li>
                 
  
         <article>
@@ -38,9 +38,9 @@
                             
                             if (lg.getlogedin()) {
                     %>
-                    <li class="nav"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
-                    <li class="nav"><a href="/Instagrim/Upload">Upload</a></li>
-                    <li class="nav"><a href="/Instagrim/Logout">Log Out</a></li>
+                    <li class="nav"><a href="/InstaLew/Profile/<%=lg.getUsername()%>">Profile</a></li>
+                    <li class="nav"><a href="/InstaLew/Upload">Upload</a></li>
+                    <li class="nav"><a href="/InstaLew/Logout">Log Out</a></li>
             </ul>
         </nav>
             <!-- Get attributes for first and last name in a linked list of strings -->
@@ -73,7 +73,7 @@
 
 
         //Display each one as we go    %>
-        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/>
+        <a href="/InstaLew/Image/<%=p.getSUUID()%>" ><img src="/InstaLew/Thumb/<%=p.getSUUID()%>"></a><br/>
         <!--Date added goes here -->
         <p><%=dateToDisplay%></p>
         <%
@@ -84,7 +84,7 @@
         </article>
         <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/InstaLew">Home</a></li>
             </ul>
         </footer>
     </body>

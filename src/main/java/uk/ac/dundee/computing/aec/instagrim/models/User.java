@@ -38,7 +38,7 @@ public class User {
             System.out.println("Can't check your password");
             return false;
         }
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instalew");
         PreparedStatement ps = session.prepare("insert into userprofiles (login,password,first_name,last_name,email) Values(?,?,?,?,?)");
 
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -59,7 +59,7 @@ public class User {
             System.out.println("Can't check your password");
             return false;
         }
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instalew");
         PreparedStatement ps = session.prepare("select password from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -85,7 +85,7 @@ public class User {
     public boolean isExistingUser(String username) {
         boolean exists = false;
 
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instalew");
         PreparedStatement ps = session.prepare("select login from userprofiles where login =?");
 
         ResultSet rs = null;
@@ -110,7 +110,7 @@ public class User {
     public boolean updateUserInfo(String username, String firstname, String lastname, Set<String> email)
     {
         //Create session
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instalew");
         
         //Use update from CQL
         PreparedStatement ps = session.prepare("update userprofiles set first_name=?, last_name=?, email=? where login=?");

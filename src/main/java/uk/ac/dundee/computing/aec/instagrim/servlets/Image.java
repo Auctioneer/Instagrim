@@ -184,7 +184,7 @@ public class Image extends HttpServlet {
         LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
            
         //After upload, redirect to user's images page.
-        response.sendRedirect("/Instagrim/Images/" + lg.getUsername());
+        response.sendRedirect("/InstaLew/Images/" + lg.getUsername());
     }
 
     private void error(String mess, HttpServletResponse response) throws ServletException, IOException {

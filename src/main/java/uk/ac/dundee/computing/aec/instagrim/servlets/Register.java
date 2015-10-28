@@ -76,7 +76,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
         if (us.isExistingUser(username) == true)
         {
             session.setAttribute("AlreadyExists", "A user with this username already exists. Please select a different one.");
-            response.sendRedirect("/Instagrim/register.jsp");
+            response.sendRedirect("/InstaLew/register.jsp");
         }
         
         
@@ -101,7 +101,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
             session.setAttribute("NoMatch", "Your passwords did not match. Please try again.");
             
             //Changed this to resigter than register.jsp
-            response.sendRedirect("/Instagrim/Register");
+            response.sendRedirect("/InstaLew/Register");
         }
         }
         

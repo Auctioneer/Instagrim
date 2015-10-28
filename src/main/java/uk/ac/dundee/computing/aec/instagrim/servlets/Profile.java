@@ -62,20 +62,36 @@ public class Profile extends HttpServlet {
         }
     }
     
+    // <editor-fold defaultstate="collapsed" desc="This method has since been deprecated, but I'm leaving it here for prosperity's sake.">
     //Method to return the most recent image the user has uploaded
     private void getMostRecentPic(String User, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        try
+        { 
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
  
         //The most recent picture is at the top of the linked list that is returned when getPicsForUser is called
         java.util.LinkedList<Pic> lsPics = tm.getPicsForUser(User);
+         
+        System.out.println("PICS IS: " + lsPics);
         
-        //So just take the first picture of the list from that
-        Pic mostRecentPic = lsPics.getFirst();
+        //System.out.println("Yo nigga it's " + lsPics.size());
         
-        //And set it as the attribute
-        request.setAttribute("mostRecentPic", mostRecentPic);
+        if(lsPics!=null){        
+            //So just take the first picture of the list from that
+            Pic mostRecentPic = lsPics.getFirst();
+            //And set it as the attribute
+            request.setAttribute("mostRecentPic", mostRecentPic);
+            
+        }
+        }
+           
+            catch(Exception yoManItsNull)
+            {
+                //Set attribute of message saying there are no pics
+                request.setAttribute("noPics", "This user has not uploaded any pictures yet.");
+            }
 
     }
     
@@ -104,7 +120,7 @@ public class Profile extends HttpServlet {
         username = args[2];
         
         //Get first, last names and email pertaining to user
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instalew");
         PreparedStatement ps = session.prepare("select first_name, last_name, email from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -136,8 +152,17 @@ public class Profile extends HttpServlet {
             }
          
         //Call method to get most recent picture
-        getMostRecentPic(username, request, response);
-         
+       // getMostRecentPic(username, request, response);  
+        
+        PicModel tm = new PicModel();
+        tm.setCluster(cluster);
+        
+        //Set current user to be the string passed in, for use in the JSP
+        
+        //Get list of pictures
+        java.util.LinkedList<Pic> lsPics = tm.getPicsForUser(username);
+                request.setAttribute("Pics", lsPics);
+
         //Direct to user's profile
         RequestDispatcher rd = request.getRequestDispatcher("/userprofile.jsp");
     rd.forward(request, response);
@@ -176,7 +201,7 @@ public class Profile extends HttpServlet {
         user.updateUserInfo(username, firstname, lastname, emailSet);
 
         //Return user to profile page, which will show updated info
-        response.sendRedirect("/Instagrim/Profile/" + lg.getUsername());
+        response.sendRedirect("/InstaLew/Profile/" + lg.getUsername());
 
     }
 

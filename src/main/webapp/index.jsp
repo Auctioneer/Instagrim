@@ -29,25 +29,25 @@
                             
                             if (lg.getlogedin()) {
                     %>
-                <li><a href="/Instagrim/Upload">Upload</a></li>
-                <li><a href="/Instagrim/Images/<%=lg.getUsername()%>"><%=lg.getUsername()%>'s Images</a></li>
-                <li><a href="/Instagrim/Logout">Log Out</a></li>
+                <li><a href="/InstaLew/Upload">Upload</a></li>
+                <li><a href="/InstaLew/Images/<%=lg.getUsername()%>"><%=lg.getUsername()%>'s Images</a></li>
+                <li><a href="/InstaLew/Logout">Log Out</a></li>
                     <%}
                             }else{
                                 %>
-                 <li><a href="/Instagrim/Register">Register</a></li>
-                <li><a href="/Instagrim/Login">Login</a></li>
+                 <li><a href="/InstaLew/Register">Register</a></li>
+                <li><a href="/InstaLew/Login">Login</a></li>
                 <%
                                         
                             
                     }%>
-                <li><a href="/Instagrim/UserList">All Users</a></li>
+                <li><a href="/InstaLew/UserList">All Users</a></li>
                 <% %>
         </ul>
         </nav>
         <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/InstaLew">Home</a></li>
                 <li>&COPY; Andy C</li>
             </ul>
         </footer>

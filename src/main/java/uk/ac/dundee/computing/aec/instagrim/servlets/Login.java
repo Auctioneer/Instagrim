@@ -70,12 +70,12 @@ public class Login extends HttpServlet {
 	    //rd.forward(request,response);
             
             //Send to user's images
-            response.sendRedirect("/Instagrim/Images/" + lg.getUsername());
+            response.sendRedirect("/InstaLew/Images/" + lg.getUsername());
             
         }else{
             System.out.println("Login failed.");
             session.setAttribute("LoginFailed", "Login failed. Please check your credentials and try again.");
-            response.sendRedirect("/Instagrim/login.jsp");
+            response.sendRedirect("/InstaLew/login.jsp");
         }
         
     }

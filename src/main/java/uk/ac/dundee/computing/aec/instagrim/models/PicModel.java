@@ -61,8 +61,8 @@ public class PicModel {
             java.util.UUID picid = convertor.getTimeUUID();
             
             //The following is a quick and dirty way of doing this, will fill the disk quickly !
-            Boolean success = (new File("/var/tmp/instagrim/")).mkdirs();
-            FileOutputStream output = new FileOutputStream(new File("/var/tmp/instagrim/" + picid));
+            Boolean success = (new File("/var/tmp/instaLew/")).mkdirs();
+            FileOutputStream output = new FileOutputStream(new File("/var/tmp/instaLew/" + picid));
 
             output.write(b);
             byte []  thumbb = picresize(picid.toString(),types[1], whatFilter);
@@ -71,7 +71,7 @@ public class PicModel {
             byte[] processedb = picdecolour(picid.toString(),types[1], whatFilter);
             ByteBuffer processedbuf=ByteBuffer.wrap(processedb);
             int processedlength=processedb.length;
-            Session session = cluster.connect("instagrim");
+            Session session = cluster.connect("instalew");
 
             PreparedStatement psInsertPic = session.prepare("insert into pics ( picid, image,thumb,processed, user, interaction_time,imagelength,thumblength,processedlength,type,name) values(?,?,?,?,?,?,?,?,?,?,?)");
             PreparedStatement psInsertPicToUser = session.prepare("insert into userpiclist ( picid, user, pic_added) values(?,?,?)");
@@ -91,7 +91,7 @@ public class PicModel {
 
     public byte[] picresize(String picid,String type, String whatFilter) {
         try {
-            BufferedImage BI = ImageIO.read(new File("/var/tmp/instagrim/" + picid));
+            BufferedImage BI = ImageIO.read(new File("/var/tmp/instaLew/" + picid));
             BufferedImage thumbnail;
             
             System.out.println(whatFilter);
@@ -121,7 +121,7 @@ public class PicModel {
     
     public byte[] picdecolour(String picid,String type, String whatFilter) {
         try {
-            BufferedImage BI = ImageIO.read(new File("/var/tmp/instagrim/" + picid));
+            BufferedImage BI = ImageIO.read(new File("/var/tmp/instaLew/" + picid));
             
             BufferedImage processed;
             
@@ -174,8 +174,9 @@ public class PicModel {
     }
    
     public java.util.LinkedList<Pic> getPicsForUser(String User) {
+        System.out.println("USER: " + User);
         java.util.LinkedList<Pic> Pics = new java.util.LinkedList<>();
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instalew");
         
         PreparedStatement ps = session.prepare("select picid from userpiclist where user =?");
         ResultSet rs = null;
@@ -185,6 +186,7 @@ public class PicModel {
                         User));
         if (rs.isExhausted()) {
             System.out.println("No Images returned");
+            System.out.println("SIZE OF PICS: " + Pics.size());
             return null;
         } else {
             for (Row row : rs) {
@@ -192,6 +194,8 @@ public class PicModel {
                 
                 //Get the ID
                 java.util.UUID UUID = row.getUUID("picid");
+                
+                System.out.println("STUFF");
                 
                 //Set UUID of picture
                 pic.setUUID(UUID);
@@ -201,6 +205,7 @@ public class PicModel {
 
             }
         }
+        
         
         //Return the linked list
         return Pics;
@@ -214,7 +219,7 @@ public class PicModel {
         java.util.LinkedList<Date> Dates = new java.util.LinkedList<>();
         
         //Start session
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instalew");
         
         //Create statement
         PreparedStatement ps = session.prepare("select pic_added from userpiclist where user =?");
@@ -246,7 +251,7 @@ public class PicModel {
     }
 
     public Pic getPic(int image_type, java.util.UUID picid) {
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instalew");
         ByteBuffer bImage = null;
         String type = null;
         int length = 0;

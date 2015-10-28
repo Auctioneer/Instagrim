@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : userlist
     Created on : 06-Oct-2015, 17:03:16
@@ -22,7 +23,7 @@
         <nav>
             <ul>   
                             
-                <li><a href="/Instagrim/">Home</a>
+                <li><a href="/InstaLew/">Home</a>
             <%  //Get the attributes for the user's details
                 String fName = (String)request.getAttribute("FirstName");
                 String lName = (String)request.getAttribute("LastName");
@@ -35,11 +36,11 @@
                         if (lg != null){
                                                         
             %>
-            <li class="nav"><a href="/Instagrim/Upload">Upload</a></li>
-            <li class="nav"><a href="/Instagrim/Logout">Log Out</a></li>
+            <li class="nav"><a href="/InstaLew/Upload">Upload</a></li>
+            <li class="nav"><a href="/InstaLew/Logout">Log Out</a></li>
             <% } else {} %>
             
-                    <li class="nav"><a href="/Instagrim/Images/<%=uName%>">Back to <%=uName%>'s Images</a></li>
+                    <li class="nav"><a href="/InstaLew/Images/<%=uName%>">Back to <%=uName%>'s Images</a></li>
             </ul>
         </nav>
         
@@ -50,10 +51,22 @@
             <p><b>Username: </b><%=uName%><br/>
                 <b>Name: </b><%=fName%> <%=lName%><br/>
                 <b>Email: </b><%=email%></p>
-            <p>Most recently uploaded image:</p>
-            <a href="/Instagrim/Image/<%=mostRecentPic.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=mostRecentPic.getSUUID()%>"></a><br/>
             
-            <% //Here we show the input boxes to change details,
+            
+             <%  //Get linked lists of pictures and dates
+            java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
+
+            if (lsPics == null) {
+        %>
+        <p>This user has not yet uploaded any images.</p>
+        <%
+        } else { 
+        Pic p = lsPics.getFirst();
+        %>
+        <p>Most recent picture:</p>
+        <a href="/InstaLew/Image/<%=p.getSUUID()%>" ><img src="/InstaLew/Thumb/<%=p.getSUUID()%>"></a><br/>
+            
+            <% } //Here we show the input boxes to change details,
                //if the user logged in matches the current user's page
                 if (lg != null){    
                     String lgName = lg.getUsername();

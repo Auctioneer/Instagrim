@@ -39,7 +39,7 @@
                 String s = (String) iterator.next();
 
         %>
-        <a href="/Instagrim/Profile/<%=s%>" ><%=s%>'s Profile</a> - <a href="/Instagrim/Images/<%=s%>" ><%=s%>'s Images<br/>
+        <a href="/InstaLew/Profile/<%=s%>" ><%=s%>'s Profile</a> - <a href="/InstaLew/Images/<%=s%>" ><%=s%>'s Images<br/>
         <%
 
             }
@@ -55,12 +55,12 @@
                             if (lg.getlogedin()) {
 
                     %>
-                    <li class="nav"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
-                    <li class="nav"><a href="/Instagrim/UserList">All Users</a></li>
-                    <li class="nav"><a href="/Instagrim/Upload">Upload</a></li>
-                    <li class="nav"><a href="/Instagrim/Logout">Log Out</a></li>
+                    <li class="nav"><a href="/InstaLew/Profile/<%=lg.getUsername()%>">Profile</a></li>
+                    <li class="nav"><a href="/InstaLew/UserList">All Users</a></li>
+                    <li class="nav"><a href="/InstaLew/Upload">Upload</a></li>
+                    <li class="nav"><a href="/InstaLew/Logout">Log Out</a></li>
             <% } }else {} %>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/InstaLew">Home</a></li>
             </ul>
         </footer>
     </body>

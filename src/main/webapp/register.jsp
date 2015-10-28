@@ -60,8 +60,8 @@
         </article>
         <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim/Login">Login</a></li>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/InstaLew/Login">Login</a></li>
+                <li class="footer"><a href="/InstaLew">Home</a></li>
             </ul>
         </footer>
     </body>

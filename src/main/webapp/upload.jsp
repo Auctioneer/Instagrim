@@ -19,7 +19,7 @@
         <nav>
             <ul>
 
-                <li class="nav"><a href="/Instagrim/UserList">All Users</a></li>
+                <li class="nav"><a href="/InstaLew/UserList">All Users</a></li>
 
                 <%
                         //If user is logged in, show profile, image page and log out
@@ -29,9 +29,9 @@
                             if (lg.getlogedin()) {
 
                     %>
-                <li class="nav"><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Profile</a></li>
-                <li><a href="/Instagrim/Images/<%=lg.getUsername()%>"><%=lg.getUsername()%>'s Images</a></li>
-                <li><a href="/Instagrim/Logout">Log Out</a></li>
+                <li class="nav"><a href="/InstaLew/Profile/<%=lg.getUsername()%>">Profile</a></li>
+                <li><a href="/InstaLew/Images/<%=lg.getUsername()%>"><%=lg.getUsername()%>'s Images</a></li>
+                <li><a href="/InstaLew/Logout">Log Out</a></li>
                 <% } } %>
             </ul>
         </nav>
@@ -53,7 +53,7 @@
         </article>
         <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/InstaLew">Home</a></li>
             </ul>
         </footer>
     </body>

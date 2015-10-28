@@ -26,7 +26,7 @@ public class Logout extends HttpServlet {
     {
         HttpSession session = request.getSession();
         session.setAttribute("LoggedIn", null);
-        response.sendRedirect("/Instagrim/");
+        response.sendRedirect("/InstaLew/");
     }
     
     @Override

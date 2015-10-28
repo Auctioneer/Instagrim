@@ -42,8 +42,8 @@
         </article>
         <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim/Register">Register</a></li>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/InstaLew/Register">Register</a></li>
+                <li class="footer"><a href="/InstaLew">Home</a></li>
             </ul>
         </footer>
     </body>

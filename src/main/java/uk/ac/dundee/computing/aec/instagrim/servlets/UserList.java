@@ -116,7 +116,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
         java.util.LinkedList<String> users = new java.util.LinkedList<>();
         
         //Start session
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instalew");
         
         //Create statement
         PreparedStatement ps = session.prepare("select login from userprofiles");
